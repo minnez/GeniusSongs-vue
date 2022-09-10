@@ -2,7 +2,7 @@
 node_modules
 /dist
 /build
-/src/views
+
 
 # local env files
 .env.local
