@@ -1,5 +1,5 @@
 <template>
-    <main>the album page</main>
+    <main><div class="album-main">ALBUM</div></main>
 </template>
 
 <script>
@@ -8,4 +8,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.album-main {
+    height: 100%;
+    font-size: 4rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+</style>

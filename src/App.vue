@@ -1,38 +1,47 @@
 <template>
     <div class="wrapper-main">
-        <nav>
-            <router-link to="/">Home</router-link>
-            <router-link to="/lyrics">Lyrics</router-link>
-            <router-link to="/album">Album</router-link>
-            <router-link to="/artist">Artist</router-link>
-            <router-link to="/my-songs">My songs</router-link>
-        </nav>
+        <Navbar />
         <main>
             <router-view />
         </main>
     </div>
 </template>
-
+<script>
+import Navbar from "./components/navBar.vue";
+export default {
+    components: {
+        Navbar,
+    },
+};
+</script>
 <style>
 #app {
-    font-family: sans-serif;
+    font-family: "Montserrat", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(227, 255, 248);
+    background: linear-gradient(
+        180deg,
+        rgba(227, 255, 248, 1) 0%,
+        rgba(117, 255, 220, 1) 61%,
+        rgba(111, 216, 233, 1) 100%
+    );
+}
+a {
+    color: inherit;
 }
 .wrapper-main {
     display: grid;
-    grid-template-columns: 200px auto;
+    grid-template-columns: 250px auto;
     height: 100%;
     outline: 1px solid red;
 }
-.wrapper-main nav {
-    display: flex;
-    flex-direction: column;
-    outline: 1px solid #8f0fc5;
-}
 .wrapper-main main {
-    outline: 1px solid blue;
     height: 100%;
 }
 
@@ -41,6 +50,25 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-    color: #8f0fc5;
+    color: #000;
+    background: rgb(227, 255, 248);
+    background: linear-gradient(
+        90deg,
+        rgba(111, 216, 233, 1) 0%,
+        rgba(117, 255, 220, 1) 61%,
+        rgba(227, 255, 248, 1) 100%
+    );
+}
+@media screen and (max-width: 820px) {
+    .wrapper-main {
+        grid-template-columns: 60px auto;
+    }
+}
+@media screen and (max-width: 450px) {
+    .wrapper-main {
+        display: flex;
+        flex: auto 60px;
+        flex-direction: column-reverse;
+    }
 }
 </style>

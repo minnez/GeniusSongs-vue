@@ -1,5 +1,5 @@
 <template>
-    <main>Artist view</main>
+    <main><div class="artist-main">ARTISTE</div></main>
 </template>
 
 <script>
@@ -8,4 +8,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.artist-main {
+    height: 100%;
+    font-size: 4rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+</style>

@@ -1,7 +1,5 @@
 <template>
-    <div class="home">
-        <h2>The music lyrics app</h2>
-    </div>
+    <div class="home-main">HOME</div>
 </template>
 
 <script>
@@ -12,3 +10,14 @@ export default {
     components: {},
 };
 </script>
+<style>
+.home-main {
+    height: 100%;
+    font-size: 4rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+</style>
