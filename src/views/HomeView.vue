@@ -8,20 +8,27 @@
                 <input placeholder="Search" class="inputTerm" type="text" />
             </div>
             <div class="profile">
-                <img src="" alt="" />
-                <span>Forzan</span>
+                <div class="profile-pic"></div>
+                <span class="profile-name">Forzan</span>
+                <i
+                    style="color: rgba(111, 216, 233, 1); cursor: pointer"
+                    class="fa-solid fa-circle-chevron-down"
+                ></i>
             </div>
         </div>
-        <div class="home-content">HOME</div>
+
+        <div class="home-content">
+            <TopArtist />
+        </div>
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import TopArtist from "@/components/TopArtist.vue";
 export default {
     name: "HomeView",
-    components: {},
+    components: { TopArtist },
 };
 </script>
 <style scoped>
@@ -39,17 +46,17 @@ export default {
 }
 
 .action-nav .profile {
-    padding: 20px;
-    font-weight: 200;
+    padding: 10px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    min-width: 150px;
 }
 .home-content {
-    font-size: 4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-    color: #fff;
+    overflow: hidden;
 }
+
 .action-nav .input {
     margin-left: 40px;
     box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.05),
@@ -58,6 +65,18 @@ export default {
 .action-nav .inputTerm {
     padding-left: 5px;
 }
+
+.profile .profile-pic {
+    width: 35px;
+    height: 35px;
+    background-image: url("../assets/album2.jpg");
+    background-size: cover;
+    border-radius: 50%;
+    margin-right: 5px;
+    border: 1px solid #fff;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.328);
+}
+
 @media screen and (max-width: 540px) {
     .action-nav .input {
         margin-left: 15px;
@@ -66,7 +85,19 @@ export default {
 @media screen and (max-width: 328px) {
     .action-nav .input {
         width: 120px;
-        margin-left: 0;
+        margin-left: 15px;
+    }
+    .top-artist {
+        padding-left: 20px;
+    }
+    .home-main {
+        padding-left: 0;
+    }
+    .profile-name {
+        display: none;
+    }
+    .action-nav .profile {
+        min-width: 100px;
     }
 }
 </style>

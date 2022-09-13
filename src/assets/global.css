@@ -4,6 +4,12 @@
 main {
     position: relative;
 }
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
 a {
     color: inherit;
 }
@@ -41,4 +47,19 @@ nav a {
     outline: none;
     border-radius: 5px;
     border: none;
+}
+::-webkit-scrollbar {
+    width: 20px;
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(111, 216, 233);
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(111, 217, 233, 0.684);
 }

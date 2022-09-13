@@ -37,7 +37,7 @@ export default {};
 <style scoped>
 .nav-main {
     background-color: #fff;
-    box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.15);
 }
 .nav-main .links {
     margin-top: 20px;
