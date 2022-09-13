@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper-main">
         <Navbar />
-        <main>
+        <main class="wrapper">
             <router-view />
         </main>
     </div>
@@ -39,7 +39,7 @@ export default {
     height: 100%;
     outline: 1px solid red;
 }
-.wrapper-main main {
+.wrapper-main .wrapper {
     height: 100%;
 }
 
