@@ -40,4 +40,10 @@ export default {
     font-weight: 200;
     padding: 0 5px;
 }
+@media screen and (max-width: 540px) {
+    .song-card .song-cover {
+        width: 100px;
+        height: 100px;
+    }
+}
 </style>
