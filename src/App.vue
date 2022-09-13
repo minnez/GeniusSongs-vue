@@ -15,9 +15,6 @@ export default {
 };
 </script>
 <style>
-* {
-    box-sizing: border-box;
-}
 #app {
     font-family: "Montserrat", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -35,9 +32,7 @@ export default {
         rgba(111, 216, 233, 1) 100%
     );
 }
-a {
-    color: inherit;
-}
+
 .wrapper-main {
     display: grid;
     grid-template-columns: 250px auto;
@@ -46,10 +41,6 @@ a {
 }
 .wrapper-main main {
     height: 100%;
-}
-
-nav a {
-    font-weight: bold;
 }
 
 nav a.router-link-exact-active {

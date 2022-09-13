@@ -1,10 +1,29 @@
 <template>
-    <main><div class="artist-main">ARTISTE</div></main>
+    <main>
+        <div class="artist-main">ARTISTE</div>
+        <div v-if="showModal">
+            <Modal @close="closemodal">
+                <Register />
+            </Modal>
+        </div>
+    </main>
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
+import Register from "../components/Register.vue";
+import Modal from "../components/Modal.vue";
 export default {
-    setup() {},
+    components: { Register, Modal },
+    setup() {
+        const showModal = ref(true);
+
+        const closemodal = () => {
+            showModal.value = !showModal.value;
+        };
+
+        return { showModal, closemodal };
+    },
 };
 </script>
 

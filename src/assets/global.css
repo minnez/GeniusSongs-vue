@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+main {
+    position: relative;
+}
+a {
+    color: inherit;
+}
+nav a {
+    font-weight: bold;
+}
+
+.input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 200px;
+    border-radius: 8px;
+    padding: 5px 10px;
+    background: #fff;
+}
+.inputTerm {
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    color: inherit;
+}
+.inputIcon {
+    margin-right: 5px;
+    width: 40px;
+    text-align: center;
+    cursor: pointer;
+    color: inherit;
+}
+.submit {
+    cursor: pointer;
+    padding: 8px 20px;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+}

@@ -1,11 +1,11 @@
 <template>
     <div class="home-main">
         <div class="action-nav">
-            <div class="search">
-                <span class="searchButton"
+            <div class="input">
+                <span class="inputIcon"
                     ><i class="fa-solid fa-magnifying-glass"></i
                 ></span>
-                <input placeholder="Search" class="searchTerm" type="text" />
+                <input placeholder="Search" class="inputTerm" type="text" />
             </div>
             <div class="profile">
                 <img src="" alt="" />
@@ -24,7 +24,7 @@ export default {
     components: {},
 };
 </script>
-<style>
+<style scoped>
 .home-main {
     height: 100%;
     padding-left: 20px;
@@ -37,34 +37,7 @@ export default {
     align-items: center;
     justify-content: space-between;
 }
-.action-nav .search {
-    position: relative;
-    display: flex;
-    align-items: center;
-    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.05),
-        -1px -1px 25px rgba(0, 0, 0, 0.05);
 
-    max-width: 200px;
-    margin-left: 40px;
-    border-radius: 8px;
-    padding: 5px 10px;
-    background: #fff;
-}
-.action-nav .searchTerm {
-    width: 100%;
-    padding: 10px 16px;
-    padding-left: 5px;
-    border-radius: 8px;
-    outline: none;
-    border: none;
-    color: inherit;
-}
-.action-nav.searchButton {
-    width: 40px;
-    text-align: center;
-    cursor: pointer;
-    color: inherit;
-}
 .action-nav .profile {
     padding: 20px;
     font-weight: 200;
@@ -77,13 +50,21 @@ export default {
     font-weight: 600;
     color: #fff;
 }
+.action-nav .input {
+    margin-left: 40px;
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.05),
+        -1px -1px 25px rgba(0, 0, 0, 0.05);
+}
+.action-nav .inputTerm {
+    padding-left: 5px;
+}
 @media screen and (max-width: 540px) {
-    .action-nav .search {
+    .action-nav .input {
         margin-left: 15px;
     }
 }
 @media screen and (max-width: 328px) {
-    .action-nav .search {
+    .action-nav .input {
         width: 120px;
         margin-left: 0;
     }
