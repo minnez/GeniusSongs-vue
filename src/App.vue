@@ -36,8 +36,9 @@ export default {
 .wrapper-main {
     display: grid;
     grid-template-columns: 250px auto;
-    height: 100%;
-    outline: 1px solid red;
+    grid-template-rows: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
 }
 .wrapper-main .wrapper {
     height: 100%;
@@ -60,9 +61,14 @@ nav a.router-link-exact-active {
 }
 @media screen and (max-width: 450px) {
     .wrapper-main {
+        height: 100%;
         display: flex;
+        justify-content: space-between;
         flex: auto 60px;
         flex-direction: column-reverse;
+    }
+    .wrapper {
+        overflow: hidden;
     }
 }
 </style>

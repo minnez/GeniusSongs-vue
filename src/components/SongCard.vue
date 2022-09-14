@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <div>
         <div class="song-card">
             <div
                 class="song-cover"
@@ -10,7 +10,7 @@
             <div class="song-name">{{ songTitle }}</div>
             <div class="song-artist">{{ artistName }}</div>
         </div>
-    </main>
+    </div>
 </template>
 
 <script>

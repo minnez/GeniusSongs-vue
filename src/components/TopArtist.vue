@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <div>
         <div class="top-artist">
             <div class="title"><h2>Top Artists</h2></div>
             <div class="songs">
@@ -50,7 +50,7 @@
                 />
             </div>
         </div>
-    </main>
+    </div>
 </template>
 
 <script>

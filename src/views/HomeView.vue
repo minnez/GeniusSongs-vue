@@ -19,6 +19,9 @@
 
         <div class="home-content">
             <TopArtist />
+            <div class="section">
+                <SongsPreview />
+            </div>
         </div>
     </div>
 </template>
@@ -26,9 +29,10 @@
 <script>
 // @ is an alias to /src
 import TopArtist from "@/components/TopArtist.vue";
+import SongsPreview from "@/components/SongsPreview.vue";
 export default {
     name: "HomeView",
-    components: { TopArtist },
+    components: { TopArtist, SongsPreview },
 };
 </script>
 <style scoped>
@@ -76,10 +80,21 @@ export default {
     border: 1px solid #fff;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.328);
 }
+.section {
+    height: calc(100% - 280px);
+}
 
 @media screen and (max-width: 540px) {
     .action-nav .input {
         margin-left: 15px;
+    }
+    .section {
+        height: calc(100% - 220px);
+    }
+}
+@media screen and (max-width: 450px) {
+    .home-main {
+        height: 100%;
     }
 }
 @media screen and (max-width: 328px) {
