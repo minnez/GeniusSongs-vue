@@ -46,6 +46,9 @@ export default {
     .home-main {
         height: 100%;
     }
+    .about h3 {
+        font-size: 0.8rem;
+    }
 }
 @media screen and (max-width: 328px) {
     .top-artist {

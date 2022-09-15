@@ -1,40 +1,77 @@
 <template>
-    <main>
-        <div class="artist-main">ARTISTE</div>
-        <div v-if="showModal">
-            <Modal @close="closemodal">
-                <Register />
-            </Modal>
+    <div class="home-main">
+        <div class="action-nav">
+            <div class="input">
+                <span class="inputIcon"
+                    ><i class="fa-solid fa-magnifying-glass"></i
+                ></span>
+                <input
+                    placeholder="Search Artists"
+                    class="inputTerm"
+                    type="text"
+                />
+            </div>
+            <div class="profile">
+                <div class="profile-pic"></div>
+                <span class="profile-name">Forzan</span>
+                <i
+                    style="color: rgba(111, 216, 233, 1); cursor: pointer"
+                    class="fa-solid fa-circle-chevron-down"
+                ></i>
+            </div>
         </div>
-    </main>
+
+        <div class="artist-main">
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+            <ArtistCard />
+        </div>
+    </div>
 </template>
 
 <script>
 import { ref } from "@vue/reactivity";
-import Register from "../components/Register.vue";
-import Modal from "../components/Modal.vue";
+import ArtistCard from "../components/ArtistCard.vue";
 export default {
-    components: { Register, Modal },
-    setup() {
-        const showModal = ref(true);
-
-        const closemodal = () => {
-            showModal.value = !showModal.value;
-        };
-
-        return { showModal, closemodal };
-    },
+    components: { ArtistCard },
+    setup() {},
 };
 </script>
 
 <style>
 .artist-main {
+    padding: 10px;
     height: 100%;
-    font-size: 4rem;
-    color: #fff;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-    font-weight: 600;
+    overflow: scroll;
+    overflow-x: hidden;
+    flex-wrap: wrap;
+}
+@media screen and (max-width: 820px) {
+    .artist-main {
+        flex-direction: column;
+        flex-wrap: wrap;
+        overflow: scroll;
+        overflow-y: hidden;
+    }
 }
 </style>

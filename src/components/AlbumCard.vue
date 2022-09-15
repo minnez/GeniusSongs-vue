@@ -1,15 +1,16 @@
 <template>
     <div>
-        <router-link to="/track-details/246">
-            <div class="song-card">
+        <router-link to="/album-details/123">
+            <div class="album-card">
                 <div
-                    class="song-cover"
+                    class="album-cover"
                     :style="{
-                        'background-image': `url(${require(`@/assets/${albumCover}`)})`,
+                        'background-image': `url(https://i.scdn.co/image/ab67616d00001e028b52c6b9bc4e43d873869699)`,
                     }"
                 ></div>
-                <div class="song-name">{{ songTitle }}</div>
-                <div class="song-artist">{{ artistName }}</div>
+                <div class="album-name">DAMN</div>
+                <div class="album-artist">Kendrick Lamar</div>
+                <div class="year">2017</div>
             </div></router-link
         >
     </div>
@@ -17,33 +18,35 @@
 
 <script>
 export default {
-    props: ["albumCover", "songTitle", "artistName"],
     setup() {},
 };
 </script>
 
 <style>
-.song-card {
+.album-card {
     width: fit-content;
 }
-.song-card .song-cover {
+.album-card .album-cover {
     width: 150px;
     height: 150px;
-    background-size: cover;
+    background-size: contain;
     border-radius: 20px;
     box-shadow: 1px 3px 15px rgba(0, 0, 0, 0.324);
     margin: 10px 10px;
 }
-.song-card .song-name {
+.album-card .album-name {
     font-weight: 600;
     padding: 0 5px;
 }
-.song-card .song-artist {
+.album-card .album-artist {
     font-weight: 200;
     padding: 0 5px;
 }
+.album-card .year {
+    padding: 0 5px;
+}
 @media screen and (max-width: 540px) {
-    .song-card .song-cover {
+    .album-card .album-cover {
         width: 100px;
         height: 100px;
     }

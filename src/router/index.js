@@ -34,6 +34,21 @@ const routes = [
         name: "mysongs",
         component: () => import("../views/Mysongs.vue"),
     },
+    {
+        path: "/album-details/:id",
+        name: "albumdetails",
+        component: () => import("../views/Details/AlbumDetails.vue"),
+    },
+    {
+        path: "/track-details/:id",
+        name: "trackdetails",
+        component: () => import("../views/Details/TrackDetails.vue"),
+    },
+    {
+        path: "/artist-details/:id",
+        name: "artistdetails",
+        component: () => import("../views/Details/ArtistDetails.vue"),
+    },
 ];
 
 const router = createRouter({

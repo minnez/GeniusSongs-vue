@@ -5,7 +5,11 @@
                 <span class="inputIcon"
                     ><i class="fa-solid fa-magnifying-glass"></i
                 ></span>
-                <input placeholder="Search" class="inputTerm" type="text" />
+                <input
+                    placeholder="Search Tracks"
+                    class="inputTerm"
+                    type="text"
+                />
             </div>
             <div class="profile">
                 <div class="profile-pic"></div>
@@ -99,10 +103,19 @@ export default {
 .home-content {
     padding: 10px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     overflow: scroll;
-    overflow-y: hidden;
+    overflow-x: hidden;
     align-items: center;
+}
+
+@media screen and (max-width: 820px) {
+    .home-content {
+        flex-direction: column;
+        flex-wrap: wrap;
+        overflow: scroll;
+        overflow-y: hidden;
+    }
 }
 </style>

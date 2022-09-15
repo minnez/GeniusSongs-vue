@@ -134,7 +134,18 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     overflow: scroll;
+    overflow-x: hidden;
+}
+
+@media screen and (max-width: 820px) {
+    .lyrics-main {
+        flex-direction: column;
+        flex-wrap: wrap;
+        overflow: scroll;
+        overflow-y: hidden;
+    }
 }
 </style>

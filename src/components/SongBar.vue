@@ -1,16 +1,18 @@
 <template>
     <div>
-        <div class="song-bar">
-            <div
-                class="cover"
-                :style="{
-                    'background-image': `url(${require(`@/assets/${albumCover}`)})`,
-                }"
-            ></div>
-            <div class="song-title">{{ songTitle }}</div>
-            <div class="artist-name">{{ artistName }}</div>
-            <div class="song-duration">{{ duration }}</div>
-        </div>
+        <router-link to="/track-details/246">
+            <div class="song-bar">
+                <div
+                    class="cover"
+                    :style="{
+                        'background-image': `url(${require(`@/assets/${albumCover}`)})`,
+                    }"
+                ></div>
+                <div class="song-title">{{ songTitle }}</div>
+                <div class="artist-name">{{ artistName }}</div>
+                <div class="song-duration">{{ duration }}</div>
+            </div></router-link
+        >
     </div>
 </template>
 
