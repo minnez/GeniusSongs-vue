@@ -10,9 +10,9 @@
             <router-link to="/"
                 ><i class="fa-solid fa-house"></i><span>Home</span></router-link
             >
-            <router-link to="/lyrics"
+            <router-link to="/tracks"
                 ><i class="fa-solid fa-music"></i
-                ><span>Lyrics</span></router-link
+                ><span>Tracks</span></router-link
             >
             <router-link to="/album"
                 ><i class="fa-solid fa-record-vinyl"></i
