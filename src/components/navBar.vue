@@ -39,6 +39,7 @@ export default {};
     background-color: #fff;
     box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.15);
 }
+
 .nav-main .links {
     margin-top: 20px;
     padding: 20px;
@@ -88,6 +89,14 @@ export default {};
     .nav-main .links {
         padding: 10px;
     }
+    .nav-main:hover {
+        animation-delay: 3s;
+        width: 300%;
+        z-index: 1;
+    }
+    .nav-main:hover .links span {
+        display: inline-block;
+    }
     .design {
         padding-left: 5px;
     }
@@ -96,6 +105,13 @@ export default {};
     }
 }
 @media screen and (max-width: 450px) {
+    .nav-main:hover {
+        width: 100%;
+        z-index: 0;
+    }
+    .nav-main:hover .links span {
+        display: none;
+    }
     .nav-main .links {
         flex-direction: row;
         justify-content: space-evenly;
