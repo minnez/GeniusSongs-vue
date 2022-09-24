@@ -52,6 +52,9 @@ export default {};
     justify-content: flex-start;
     text-decoration: none;
 }
+.nav-main .links a:hover {
+    background-color: rgba(111, 216, 233, 0.15);
+}
 .nav-main .links a i {
     padding-right: 20px;
 }
