@@ -2,6 +2,8 @@
 
 based on the Spotify API
 
+not complete yet
+
 ## Project setup
 
 ```
