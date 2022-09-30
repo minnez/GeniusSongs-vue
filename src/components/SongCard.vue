@@ -10,6 +10,9 @@
                 ></div>
                 <div class="song-name">{{ songTitle }}</div>
                 <div class="song-artist">{{ artistName }}</div>
+                <div v-if="rank" class="song-artist">
+                    Rank: <span style="font-weight: 700">{{ rank }}</span>
+                </div>
             </div></router-link
         >
     </div>
@@ -17,7 +20,7 @@
 
 <script>
 export default {
-    props: ["albumCover", "songTitle", "artistName"],
+    props: ["albumCover", "songTitle", "artistName", "rank"],
     setup() {},
 };
 </script>
@@ -35,6 +38,8 @@ export default {
     margin: 10px 10px;
 }
 .song-card .song-name {
+    max-width: 200px;
+    overflow: hidden;
     font-weight: 600;
     padding: 0 5px;
 }
@@ -46,6 +51,9 @@ export default {
     .song-card .song-cover {
         width: 100px;
         height: 100px;
+    }
+    .song-card .song-name {
+        max-width: 150px;
     }
 }
 </style>
