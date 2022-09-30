@@ -8,7 +8,7 @@
                     :key="song.chartEntryData"
                     :artistName="song.trackMetadata.artists[0].name"
                     :songTitle="song.trackMetadata.trackName"
-                    albumCover="album1.jpg"
+                    :albumCover="song.trackMetadata.displayImageUri"
                     :rank="song.chartEntryData.currentRank"
                 />
                 <!-- <div>{{ topSongs[0].chartEntryData.currentRank }}</div> -->
@@ -56,6 +56,7 @@ export default {
     overflow: scroll;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     flex-wrap: wrap;
     overflow-y: hidden;
 }

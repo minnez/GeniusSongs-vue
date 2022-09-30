@@ -5,7 +5,7 @@
                 <div
                     class="song-cover"
                     :style="{
-                        'background-image': `url(${require(`@/assets/${albumCover}`)})`,
+                        'background-image': `url(${albumCover})`,
                     }"
                 ></div>
                 <div class="song-name">{{ songTitle }}</div>
