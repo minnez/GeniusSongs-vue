@@ -2,7 +2,7 @@
     <div class="topart">
         <div class="top-artist">
             <div class="title"><h2>Top Songs</h2></div>
-            <div v-if="topSongs" class="songs">
+            <div v-if="topSongs.length > 0" class="songs">
                 <SongCard
                     v-for="song in topSongs"
                     :key="song.chartEntryData"
@@ -11,7 +11,6 @@
                     :albumCover="song.trackMetadata.displayImageUri"
                     :rank="song.chartEntryData.currentRank"
                 />
-                <!-- <div>{{ topSongs[0].chartEntryData.currentRank }}</div> -->
             </div>
         </div>
     </div>
@@ -19,32 +18,18 @@
 
 <script>
 import SongCard from "@/components/SongCard.vue";
-import { onMounted, onUnmounted, ref } from "@vue/runtime-core";
+import { computed, onMounted, onUnmounted } from "@vue/runtime-core";
+import { useStore } from "vuex";
 export default {
     components: { SongCard },
     setup() {
+        const store = useStore();
         onMounted(() => {
-            console.log("component is mounted");
-
-            const options = {
-                method: "GET",
-                headers: {
-                    "X-RapidAPI-Key":
-                        "fc1c69b0ddmsh6e762978b038e41p1d2d87jsn4a37bd95d703",
-                    "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
-                },
-            };
-
-            fetch(
-                "https://spotify81.p.rapidapi.com/top_200_tracks?country=GLOBAL",
-                options
-            )
-                .then((response) => response.json())
-                .then((response) => (topSongs.value = response))
-                .catch((err) => console.error(err));
+            console.log("component mounted");
+            store.dispatch("getTopSongs");
         });
 
-        const topSongs = ref();
+        const topSongs = computed(() => store.state.topSongs);
 
         return { topSongs };
     },
