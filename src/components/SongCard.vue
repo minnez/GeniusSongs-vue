@@ -10,7 +10,7 @@
                 ></div>
                 <div class="song-name">{{ songTitle }}</div>
                 <div class="song-artist">{{ artistName }}</div>
-                <div v-if="rank" class="song-artist">
+                <div v-if="rank" class="song-artist" style="font-weight: 200">
                     Rank: <span style="font-weight: 700">{{ rank }}</span>
                 </div>
             </div></router-link
@@ -38,13 +38,17 @@ export default {
     margin: 10px 10px;
 }
 .song-card .song-name {
+    overflow: hidden;
+    white-space: nowrap;
+
     max-width: 200px;
+    text-overflow: ellipsis;
     overflow: hidden;
     font-weight: 600;
     padding: 0 5px;
 }
 .song-card .song-artist {
-    font-weight: 200;
+    font-weight: 400;
     padding: 0 5px;
 }
 @media screen and (max-width: 540px) {
@@ -54,6 +58,7 @@ export default {
     }
     .song-card .song-name {
         max-width: 150px;
+        text-overflow: ellipsis;
     }
 }
 </style>

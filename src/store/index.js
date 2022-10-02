@@ -28,7 +28,7 @@ export default createStore({
                 options
             )
                 .then((response) => response.json())
-                .then((response) => commit("SAVE_TOP_SONGS", response))
+                .then((response) => this.state.topSongs.push(...response))
                 .catch((err) => console.error(err));
         },
     },

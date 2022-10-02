@@ -4,7 +4,7 @@
             <div class="title"><h2>Top Songs</h2></div>
             <div v-if="topSongs.length > 0" class="songs">
                 <SongCard
-                    v-for="song in topSongs"
+                    v-for="song in topSongs.slice(0, 50)"
                     :key="song.chartEntryData"
                     :artistName="song.trackMetadata.artists[0].name"
                     :songTitle="song.trackMetadata.trackName"
@@ -12,6 +12,7 @@
                     :rank="song.chartEntryData.currentRank"
                 />
             </div>
+            <!-- <div>{{ topSongs }}</div> -->
         </div>
     </div>
 </template>
@@ -39,11 +40,10 @@ export default {
 <style>
 .songs {
     overflow: scroll;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    display: grid;
+    grid-auto-flow: column;
     overflow-y: hidden;
+    grid-template-rows: auto auto;
 }
 .topart {
     height: 100%;
