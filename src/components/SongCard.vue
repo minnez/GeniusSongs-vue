@@ -1,6 +1,19 @@
 <template>
     <div>
-        <router-link to="/track-details/246">
+        <router-link
+            :to="{
+                name: 'trackdetails',
+                params: { id: link },
+                query: {
+                    albumCover,
+                    songTitle,
+                    artistName,
+                    rank,
+                    otherArtiste,
+                    releaseDate,
+                },
+            }"
+        >
             <div class="song-card">
                 <div
                     class="song-cover"
@@ -20,7 +33,15 @@
 
 <script>
 export default {
-    props: ["albumCover", "songTitle", "artistName", "rank"],
+    props: [
+        "albumCover",
+        "songTitle",
+        "artistName",
+        "rank",
+        "link",
+        "otherArtiste",
+        "releaseDate",
+    ],
     setup() {},
 };
 </script>

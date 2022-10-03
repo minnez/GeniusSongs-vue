@@ -6,9 +6,15 @@
                 <SongCard
                     v-for="song in topSongs.slice(0, 50)"
                     :key="song.chartEntryData"
+                    :link="song.trackMetadata.trackUri.slice(14)"
                     :artistName="song.trackMetadata.artists[0].name"
+                    :otherArtiste="
+                        song.trackMetadata.artists[1] &&
+                        song.trackMetadata.artists[1].name
+                    "
                     :songTitle="song.trackMetadata.trackName"
                     :albumCover="song.trackMetadata.displayImageUri"
+                    :releaseDate="song.trackMetadata.releaseDate"
                     :rank="song.chartEntryData.currentRank"
                 />
             </div>

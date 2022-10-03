@@ -6,27 +6,50 @@
         <div class="details">
             <div
                 :style="{
-                    'background-image': `url(https://i.scdn.co/image/ab67616d00001e028b52c6b9bc4e43d873869699)`,
+                    'background-image': `url(${albumCover})`,
                 }"
                 class="album-details-cover"
             ></div>
-            <div class="name">DNA</div>
-            <div class="owner">Kendrick Lamar</div>
+            <div class="name">{{ songTitle }}</div>
+            <div class="owner">{{ artistName }}</div>
             <div class="duration">4:56</div>
-            <div class="genre">Rap</div>
+            <div class="genre">{{ rank }}</div>
+            <div>{{ otherArtiste }}</div>
+            <div>{{ releaseDate }}</div>
         </div>
     </div>
 </template>
 
 <script>
 import SongBar from "@/components/SongBar.vue";
+import { onMounted, ref } from "@vue/runtime-core";
+import { useRoute } from "vue-router";
 export default {
-    components: {
-        SongBar,
-    },
+    components: {},
     data() {
         return {
             id: this.$route.params.id,
+        };
+    },
+    setup() {
+        const route = useRoute();
+
+        const {
+            albumCover,
+            songTitle,
+            artistName,
+            rank,
+            releaseDate,
+            otherArtiste,
+        } = route.query;
+
+        return {
+            albumCover,
+            songTitle,
+            artistName,
+            rank,
+            otherArtiste,
+            releaseDate,
         };
     },
 };
