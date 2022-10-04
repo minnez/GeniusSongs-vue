@@ -27,7 +27,6 @@ export default {};
     }
 }
 .loading {
-    min-height: 400px;
     height: 100%;
     display: flex;
     justify-content: center;
