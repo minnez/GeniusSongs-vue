@@ -5,22 +5,24 @@
                 <div
                     class="artist-cover"
                     :style="{
-                        'background-image': `url(${require(`@/assets/album2.jpg`)})`,
+                        'background-image': `url(${picture})`,
                     }"
                 ></div>
-                <div class="artist-name">Sarkodie</div>
+                <div class="artist-name">{{ name }}</div>
             </div></router-link
         >
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    props: ["artistId", "name", "picture"],
+};
 </script>
 
 <style>
 .artist-card {
-    width: fit-content;
+    min-width: 240px;
     margin: 10px;
     display: flex;
     border-radius: 20px;

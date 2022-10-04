@@ -22,13 +22,13 @@ export default createStore({
                 },
             };
 
-            fetch(
-                "https://spotify81.p.rapidapi.com/top_200_tracks?country=GLOBAL",
-                options
-            )
-                .then((response) => response.json())
-                .then((response) => this.state.topSongs.push(...response))
-                .catch((err) => console.error(err));
+            // fetch(
+            //     "https://spotify81.p.rapidapi.com/top_200_tracks?country=GLOBAL",
+            //     options
+            // )
+            //     .then((response) => response.json())
+            //     .then((response) => this.state.topSongs.push(...response))
+            //     .catch((err) => console.error(err));
         },
     },
     modules: {},
