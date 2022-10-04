@@ -1,7 +1,11 @@
 <template>
     <div class="details-main">
         <div class="back">
-            <span style="padding: 10px 5px" @click="$router.go(-1)">
+            <span
+                class="cursor: pointer"
+                style="padding: 10px 5px"
+                @click="$router.go(-1)"
+            >
                 <i style="padding: 7px" class="fa-solid fa-arrow-left"></i
                 >Back</span
             >

@@ -17,9 +17,8 @@ export default createStore({
             const options = {
                 method: "GET",
                 headers: {
-                    "X-RapidAPI-Key":
-                        "fc1c69b0ddmsh6e762978b038e41p1d2d87jsn4a37bd95d703",
-                    "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
+                    "X-RapidAPI-Key": process.env.VUE_APP_X_RAPID_API_KEY,
+                    "X-RapidAPI-Host": process.env.VUE_APP_X_RAPID_API_HOST,
                 },
             };
 
