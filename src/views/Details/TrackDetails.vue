@@ -1,7 +1,10 @@
 <template>
     <div class="details-main">
         <div class="back">
-            <i style="padding: 7px" class="fa-solid fa-arrow-left"></i>Back
+            <span style="padding: 10px 5px" @click="$router.go(-1)">
+                <i style="padding: 7px" class="fa-solid fa-arrow-left"></i
+                >Back</span
+            >
         </div>
         <div class="details">
             <div
@@ -10,27 +13,35 @@
                 }"
                 class="album-details-cover"
             ></div>
-            <div class="name">{{ songTitle }}</div>
-            <div class="owner">{{ artistName }}</div>
-            <div class="duration">4:56</div>
-            <div class="genre">{{ rank }}</div>
-            <div>{{ otherArtiste }}</div>
-            <div>{{ releaseDate }}</div>
+            <div class="t-details">
+                <div class="name mb-15">
+                    Song Title: <span>{{ songTitle }}</span>
+                </div>
+                <div class="owner mb-15">
+                    Artist Name: <span>{{ artistName }}</span>
+                </div>
+                <!-- <div class="duration">4:56</div> -->
+                <!-- <div class="genre">{{ rank }}</div> -->
+                <div class="mb-15">
+                    Other Artistes:
+                    <span v-if="otherArtiste">{{ otherArtiste }}</span>
+                    <span v-else>None</span>
+                </div>
+                <div class="mb-15">
+                    Released on: <span>{{ releaseDate }}</span>
+                </div>
+                <div class="mb-15">
+                    Top songs Ranking: <span>{{ rank }}</span>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import SongBar from "@/components/SongBar.vue";
-import { onMounted, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 export default {
     components: {},
-    data() {
-        return {
-            id: this.$route.params.id,
-        };
-    },
     setup() {
         const route = useRoute();
 
@@ -56,6 +67,13 @@ export default {
 </script>
 
 <style>
+.mb-15 {
+    margin-bottom: 15px;
+    font-weight: 200;
+}
+.mb-15 > span {
+    font-weight: 600;
+}
 .details-main {
     height: 100%;
     display: grid;
@@ -67,6 +85,15 @@ export default {
     padding: 20px;
     overflow: scroll;
     overflow-x: hidden;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.t-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .album-details-cover {
@@ -74,29 +101,25 @@ export default {
     width: 250px;
     border-radius: 20px;
     background-size: cover;
-    margin: auto;
 }
 .details .name {
-    font-weight: 600;
-    font-size: 1.2rem;
     width: fit-content;
-    margin: auto;
+}
+.details .name > span {
+    font-size: 1.5rem;
 }
 .details .followers {
     font-weight: 400;
     font-size: 1.1rem;
     width: fit-content;
-    margin: auto;
 }
 .duration {
     width: fit-content;
-    margin: auto;
 }
 .details .genre {
     font-weight: 200;
     font-size: 1.1rem;
     width: fit-content;
-    margin: auto;
 }
 .hed {
     padding: 10px;
@@ -107,7 +130,11 @@ export default {
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
-
+@media screen and (max-width: 700px) {
+    .details {
+        flex-direction: column;
+    }
+}
 @media screen and (max-width: 540px) {
     .album-details-cover {
         height: 150px;
@@ -115,7 +142,6 @@ export default {
         background-size: contain;
     }
     .details .name {
-        font-weight: 600;
         font-size: 1rem;
     }
     .details .followers {
@@ -127,6 +153,7 @@ export default {
         font-size: 1rem;
     }
     .details {
+        flex-direction: column;
         scrollbar-width: none;
         -ms-overflow-style: none;
     }
