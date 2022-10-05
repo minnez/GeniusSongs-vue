@@ -22,8 +22,12 @@
                 ></i>
             </div>
         </div>
+        <div v-if="!queryData" class="beforeSearchArtist">
+            <h2 v-if="!loading">Search for Artists to view here</h2>
+            <Loading2 v-else />
+        </div>
 
-        <div class="artist-main">
+        <div v-else class="artist-main">
             <ArtistCard
                 v-for="(artist, index) in queryData"
                 :key="index"
@@ -41,10 +45,12 @@
 <script>
 import { ref } from "@vue/reactivity";
 import ArtistCard from "../components/ArtistCard.vue";
+import Loading2 from "../components/loading/Loading2.vue";
 export default {
-    components: { ArtistCard },
+    components: { ArtistCard, Loading2 },
     setup() {
         const searchArtist = () => {
+            loading.value = true;
             const options = {
                 method: "GET",
                 headers: {
@@ -60,18 +66,30 @@ export default {
             )
                 .then((response) => response.json())
                 .then((response) => (queryData.value = response.artists.items))
+                .then(() => (loading.value = false))
                 .catch((err) => console.error(err));
             // console.log(artistSearch.value);
         };
         const artistSearch = ref("");
         const queryData = ref();
+        const loading = ref(false);
 
-        return { artistSearch, searchArtist, queryData };
+        return { artistSearch, searchArtist, queryData, loading };
     },
 };
 </script>
 
 <style>
+.beforeSearchArtist {
+    height: 400px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgba(111, 216, 233, 0.8);
+    text-align: center;
+}
 .artist-main {
     padding: 10px;
     height: 100%;

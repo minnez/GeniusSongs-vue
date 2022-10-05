@@ -18,25 +18,30 @@ export default {};
 @keyframes beat {
     0% {
         transform: scaley(-50%);
+        background-color: rgba(111, 216, 233, 0.4);
     }
     50% {
         transform: scaley(100%);
+        background-color: rgb(11, 218, 250);
     }
     100% {
         transform: scaley(-50%);
+        background-color: rgba(111, 216, 233, 0.4);
     }
 }
 .loading {
-    height: 100%;
+    height: fit-content;
+    width: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .barr {
     animation: 2.1s linear infinite beat;
     width: 5px;
-    height: 30px;
-    background-color: #000000;
+    height: 40px;
+    background-color: rgb(11, 218, 250);
     margin: 1px;
 }
 .one {
