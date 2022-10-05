@@ -18,6 +18,7 @@
                     :rank="song.chartEntryData.currentRank"
                 />
             </div>
+            <div v-else class="topartistloading"><Loading2 /></div>
             <!-- <div>{{ topSongs }}</div> -->
         </div>
     </div>
@@ -25,15 +26,21 @@
 
 <script>
 import SongCard from "@/components/SongCard.vue";
+import Loading2 from "@/components/loading/Loading2.vue";
 import { computed, onMounted, onUnmounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
 export default {
-    components: { SongCard },
+    components: { SongCard, Loading2 },
     setup() {
         const store = useStore();
         onMounted(() => {
-            console.log("component mounted");
-            store.dispatch("getTopSongs");
+            if (store.state.topSongs.length) {
+                console.log("store has it");
+                // const topSongs = computed(() => store.state.topSongs);
+            } else {
+                console.log("fetching in mounted");
+                store.dispatch("getTopSongs");
+            }
         });
 
         const topSongs = computed(() => store.state.topSongs);
@@ -51,10 +58,19 @@ export default {
     overflow-y: hidden;
     grid-template-rows: auto auto;
 }
+.topartistloading {
+    margin: auto;
+    top: 50px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .topart {
     height: 100%;
 }
 .top-artist {
+    position: relative;
     padding-top: 20px;
     display: grid;
     grid-template-rows: 30px auto;

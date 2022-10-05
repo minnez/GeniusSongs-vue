@@ -17,15 +17,15 @@ export default {};
 <style>
 @keyframes beat {
     0% {
-        transform: scaley(-50%);
+        transform: scaley(150%);
         background-color: rgba(111, 216, 233, 0.4);
     }
     50% {
-        transform: scaley(100%);
+        transform: scaley(500%);
         background-color: rgb(11, 218, 250);
     }
     100% {
-        transform: scaley(-50%);
+        transform: scaley(100%);
         background-color: rgba(111, 216, 233, 0.4);
     }
 }
@@ -40,7 +40,7 @@ export default {};
 .barr {
     animation: 2.1s linear infinite beat;
     width: 5px;
-    height: 40px;
+    height: 5px;
     background-color: rgb(11, 218, 250);
     margin: 1px;
 }

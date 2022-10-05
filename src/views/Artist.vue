@@ -22,8 +22,8 @@
                 ></i>
             </div>
         </div>
-        <div v-if="!queryData" class="beforeSearchArtist">
-            <h2 v-if="!loading">Search for Artists to view here</h2>
+        <div v-if="loading" class="beforeSearchArtist">
+            <h2 v-if="!queryData">Search for Artists to view here</h2>
             <Loading2 v-else />
         </div>
 
@@ -50,6 +50,7 @@ export default {
     components: { ArtistCard, Loading2 },
     setup() {
         const searchArtist = () => {
+            queryData.value = true;
             loading.value = true;
             const options = {
                 method: "GET",
@@ -72,7 +73,7 @@ export default {
         };
         const artistSearch = ref("");
         const queryData = ref();
-        const loading = ref(false);
+        const loading = ref(true);
 
         return { artistSearch, searchArtist, queryData, loading };
     },
