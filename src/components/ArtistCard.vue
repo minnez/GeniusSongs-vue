@@ -1,6 +1,11 @@
 <template>
     <div>
-        <router-link to="/artist-details/456">
+        <router-link
+            :to="{
+                name: 'artistdetails',
+                params: { id: artistId },
+            }"
+        >
             <div class="artist-card">
                 <div
                     class="artist-cover"
