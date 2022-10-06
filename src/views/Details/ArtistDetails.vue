@@ -10,7 +10,18 @@
                 >Back</span
             >
         </div>
-        <div class="details">
+        <div
+            v-if="!profilePic"
+            style="
+                height: calc(100% - 30px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            "
+        >
+            <Loading2 />
+        </div>
+        <div v-else class="details">
             <div
                 :style="{
                     'background-image': `url(${profilePic})`,
@@ -40,10 +51,11 @@
 </template>
 
 <script>
+import Loading2 from "@/components/loading/Loading2.vue";
 import { onMounted, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 export default {
-    components: {},
+    components: { Loading2 },
     setup() {
         const route = useRoute();
         const profilePic = ref();
@@ -66,7 +78,6 @@ export default {
             fetch("https://spotify81.p.rapidapi.com/artists?ids=" + id, options)
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log(response.artists[0]);
                     profilePic.value = response.artists[0].images[0].url;
                     name.value = response.artists[0].name;
                     type.value = response.artists[0].type;
