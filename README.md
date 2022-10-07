@@ -25,3 +25,8 @@ npm run build
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### In App
+
+The application is powered by spotify Api on Rapid Api
+it displays the top trending songs on spotify on the home page
