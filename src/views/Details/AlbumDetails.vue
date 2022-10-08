@@ -54,14 +54,38 @@
 
 <script>
 import SongBar from "@/components/SongBar.vue";
+import { useRoute } from "vue-router";
+import { ref } from "@vue/reactivity";
+import { onMounted } from "@vue/runtime-core";
 export default {
     components: {
         SongBar,
     },
-    data() {
-        return {
-            id: this.$route.params.id,
-        };
+    setup() {
+        const route = useRoute();
+        const profilePic = ref();
+        const name = ref();
+        const type = ref();
+        const followers = ref();
+        const genres = ref();
+
+        const { id } = route.params;
+        console.log(id);
+
+        onMounted(() => {
+            const options = {
+                method: "GET",
+                headers: {
+                    "X-RapidAPI-Key": process.env.VUE_APP_X_RAPID_API_KEY,
+                    "X-RapidAPI-Host": process.env.VUE_APP_X_RAPID_API_HOST,
+                },
+            };
+
+            fetch("https://spotify81.p.rapidapi.com/albums?ids=" + id, options)
+                .then((response) => response.json())
+                .then((response) => console.log(response))
+                .catch((err) => console.error(err));
+        });
     },
 };
 </script>

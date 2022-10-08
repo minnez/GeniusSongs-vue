@@ -22,12 +22,12 @@
                 ></i>
             </div>
         </div>
-        <!-- <div v-if="loading" class="beforeSearchArtist">
+        <div v-if="loading" class="beforeSearchArtist">
             <h2 v-if="!queryData">Search for Albums to view here</h2>
             <Loading2 v-else />
-        </div> -->
+        </div>
 
-        <div class="artist-main">
+        <div v-else class="artist-main">
             <AlbumCard
                 v-for="(album, index) in queryData"
                 :link="album.data.uri.slice(14)"
