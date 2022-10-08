@@ -1,16 +1,21 @@
 <template>
     <div>
-        <router-link to="/album-details/123">
+        <router-link
+            :to="{
+                name: 'albumdetails',
+                params: { id: link },
+            }"
+        >
             <div class="album-card">
                 <div
                     class="album-cover"
                     :style="{
-                        'background-image': `url(https://i.scdn.co/image/ab67616d00001e028b52c6b9bc4e43d873869699)`,
+                        'background-image': `url(${cover})`,
                     }"
                 ></div>
-                <div class="album-name">DAMN</div>
-                <div class="album-artist">Kendrick Lamar</div>
-                <div class="year">2017</div>
+                <div class="album-name">{{ name }}</div>
+                <div class="album-artist">{{ owner }}</div>
+                <div class="year">{{ year }}</div>
             </div></router-link
         >
     </div>
@@ -18,6 +23,7 @@
 
 <script>
 export default {
+    props: ["link", "name", "cover", "owner", "year"],
     setup() {},
 };
 </script>
@@ -25,6 +31,9 @@ export default {
 <style>
 .album-card {
     width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .album-card .album-cover {
     width: 150px;
