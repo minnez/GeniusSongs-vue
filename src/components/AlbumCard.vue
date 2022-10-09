@@ -46,6 +46,7 @@ export default {
 .album-card .album-name {
     font-weight: 600;
     padding: 0 5px;
+    max-width: 200px;
 }
 .album-card .album-artist {
     font-weight: 200;

@@ -1,18 +1,28 @@
 <template>
     <div class="details-main">
         <div class="back">
-            <i style="padding: 7px" class="fa-solid fa-arrow-left"></i>Back
+            <span
+                class="cursor: pointer"
+                style="padding: 10px 5px"
+                @click="$router.go(-1)"
+            >
+                <i style="padding: 7px" class="fa-solid fa-arrow-left"></i
+                >Back</span
+            >
         </div>
-        <div class="details">
+        <div class="load" v-if="!albumCover">
+            <Loading2 />
+        </div>
+        <div v-else class="details">
             <div
                 :style="{
-                    'background-image': `url(https://i.scdn.co/image/ab67616d00001e028b52c6b9bc4e43d873869699)`,
+                    'background-image': `url(${albumCover})`,
                 }"
                 class="album-details-cover"
             ></div>
-            <div class="name">DAMN.</div>
-            <div class="owner">Kendrick Lamar</div>
-            <div class="year-of-release">2017-06-11</div>
+            <div class="name">{{ name }}</div>
+            <div class="owner">{{ owner }}</div>
+            <div class="year-of-release">{{ year }}</div>
             <div class="album-tracks">
                 <div class="hed">Tracks</div>
                 <div class="singles">
@@ -54,19 +64,21 @@
 
 <script>
 import SongBar from "@/components/SongBar.vue";
+import Loading2 from "@/components/loading/Loading2.vue";
 import { useRoute } from "vue-router";
 import { ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 export default {
     components: {
         SongBar,
+        Loading2,
     },
     setup() {
         const route = useRoute();
-        const profilePic = ref();
+        const albumCover = ref();
         const name = ref();
-        const type = ref();
-        const followers = ref();
+        const owner = ref();
+        const year = ref();
         const genres = ref();
 
         const { id } = route.params;
@@ -83,14 +95,29 @@ export default {
 
             fetch("https://spotify81.p.rapidapi.com/albums?ids=" + id, options)
                 .then((response) => response.json())
-                .then((response) => console.log(response))
+                .then((response) => {
+                    albumCover.value = response.albums[0].images[0].url;
+                    name.value = response.albums[0].name;
+                    year.value = response.albums[0].release_date;
+                    owner.value = response.albums[0].artists[0].name;
+
+                    console.log(response.albums);
+                })
                 .catch((err) => console.error(err));
         });
+
+        return { albumCover, name, year, owner };
     },
 };
 </script>
 
 <style>
+.load {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .details-main {
     height: 100%;
     display: grid;
