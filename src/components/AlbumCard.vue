@@ -51,6 +51,7 @@ export default {
 .album-card .album-artist {
     font-weight: 200;
     padding: 0 5px;
+    max-width: 200px;
 }
 .album-card .year {
     padding: 0 5px;
