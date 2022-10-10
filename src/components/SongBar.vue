@@ -5,21 +5,30 @@
                 <div
                     class="cover"
                     :style="{
-                        'background-image': `url(${require(`@/assets/${albumCover}`)})`,
+                        'background-image': `url(${albumCover})`,
                     }"
                 ></div>
                 <div class="song-title">{{ songTitle }}</div>
                 <div class="artist-name">{{ artistName }}</div>
-                <div class="song-duration">{{ duration }}</div>
+                <div class="song-duration">{{ timeDuration }}</div>
             </div></router-link
         >
     </div>
 </template>
 
 <script>
+import { computed } from "@vue/runtime-core";
 export default {
-    props: ["albumCover", "songTitle", "artistName", "duration"],
-    setup() {},
+    props: ["albumCover", "songTitle", "artistName", "duration", "trackId"],
+    setup(props) {
+        const timeDuration = computed(() => {
+            let minutes = Math.floor(props.duration / 60000);
+            let seconds = ((props.duration % 60000) / 1000).toFixed(0);
+            return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        });
+
+        return { timeDuration };
+    },
 };
 </script>
 

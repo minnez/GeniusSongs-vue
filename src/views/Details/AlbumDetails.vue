@@ -27,34 +27,13 @@
                 <div class="hed">Tracks</div>
                 <div class="singles">
                     <SongBar
-                        albumCover="album1.jpg"
-                        songTitle="Final Countdown"
-                        artistName="Paa Bobo"
-                        duration="3:16"
-                    />
-                    <SongBar
-                        albumCover="album1.jpg"
-                        songTitle="Final Countdown"
-                        artistName="Paa Bobo"
-                        duration="3:16"
-                    />
-                    <SongBar
-                        albumCover="album1.jpg"
-                        songTitle="Final Countdown"
-                        artistName="Paa Bobo"
-                        duration="3:16"
-                    />
-                    <SongBar
-                        albumCover="album1.jpg"
-                        songTitle="Final Countdown"
-                        artistName="Paa Bobo"
-                        duration="3:16"
-                    />
-                    <SongBar
-                        albumCover="album1.jpg"
-                        songTitle="Final Countdown"
-                        artistName="Paa Bobo"
-                        duration="3:16"
+                        v-for="track in albumTracks"
+                        :key="track"
+                        :trackId="track.id"
+                        :albumCover="albumCover"
+                        :songTitle="track.name"
+                        :artistName="owner"
+                        :duration="track.duration_ms"
                     />
                 </div>
             </div>
@@ -79,7 +58,7 @@ export default {
         const name = ref();
         const owner = ref();
         const year = ref();
-        const genres = ref();
+        const albumTracks = ref();
 
         const { id } = route.params;
         console.log(id);
@@ -100,13 +79,20 @@ export default {
                     name.value = response.albums[0].name;
                     year.value = response.albums[0].release_date;
                     owner.value = response.albums[0].artists[0].name;
+                    albumTracks.value = response.albums[0].tracks.items;
 
-                    console.log(response.albums);
+                    console.log(response.albums[0].tracks.items);
                 })
                 .catch((err) => console.error(err));
         });
 
-        return { albumCover, name, year, owner };
+        return {
+            albumCover,
+            name,
+            year,
+            owner,
+            albumTracks,
+        };
     },
 };
 </script>
