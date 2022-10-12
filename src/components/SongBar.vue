@@ -43,8 +43,9 @@ export default {
     background: #fff;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding: 8px;
+    padding-right: 12px;
     border-radius: 12px;
     width: 400px;
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.12);

@@ -13,7 +13,7 @@
         <div class="load" v-if="!albumCover">
             <Loading2 />
         </div>
-        <div v-else class="details">
+        <div v-else class="detailss">
             <div
                 :style="{
                     'background-image': `url(${albumCover})`,
@@ -119,7 +119,7 @@ export default {
     grid-template-rows: 50px calc(100% - 20px);
     grid-template-columns: 100%;
 }
-.details {
+.detailss {
     height: calc(100% - 30px);
     padding: 20px;
     overflow: scroll;
@@ -133,19 +133,19 @@ export default {
     background-size: cover;
     margin: auto;
 }
-.details .name {
+.detailss .name {
     font-weight: 600;
     font-size: 1.2rem;
     width: fit-content;
     margin: auto;
 }
-.details .owner {
+.detailss .owner {
     font-weight: 400;
     font-size: 1.1rem;
     width: fit-content;
     margin: auto;
 }
-.details .year-of-release {
+.detailss .year-of-release {
     font-weight: 200;
     font-size: 1.1rem;
     width: fit-content;
@@ -171,23 +171,23 @@ export default {
         width: 150px;
         background-size: contain;
     }
-    .details .name {
+    .detailss .name {
         font-weight: 600;
         font-size: 1rem;
     }
-    .details .owner {
+    .detailss .owner {
         font-weight: 400;
         font-size: 1rem;
     }
-    .details .year-of-release {
+    .detailss .year-of-release {
         font-weight: 200;
         font-size: 1rem;
     }
-    .details {
+    .detailss {
         scrollbar-width: none;
         -ms-overflow-style: none;
     }
-    .details::-webkit-scrollbar {
+    .detailss::-webkit-scrollbar {
         display: none;
     }
 }
