@@ -20,7 +20,13 @@
                 }"
                 class="album-details-cover"
             ></div>
-            <div class="name">{{ name }}</div>
+            <router-link
+                :to="{
+                    name: 'artistdetails',
+                    params: { id: ownerId },
+                }"
+                ><div class="name">{{ name }}</div></router-link
+            >
             <div class="owner">{{ owner }}</div>
             <div class="year-of-release">{{ year }}</div>
             <div class="album-tracks">
@@ -59,6 +65,7 @@ export default {
         const owner = ref();
         const year = ref();
         const albumTracks = ref();
+        const ownerId = ref();
 
         const { id } = route.params;
         console.log(id);
@@ -79,6 +86,7 @@ export default {
                     name.value = response.albums[0].name;
                     year.value = response.albums[0].release_date;
                     owner.value = response.albums[0].artists[0].name;
+                    ownerId.value = response.albums[0].artists[0].id;
                     albumTracks.value = response.albums[0].tracks.items;
 
                     console.log(response.albums[0].tracks.items);
@@ -91,6 +99,7 @@ export default {
             name,
             year,
             owner,
+            ownerId,
             albumTracks,
         };
     },

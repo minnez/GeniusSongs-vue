@@ -1,6 +1,11 @@
 <template>
     <div>
-        <router-link to="/track-details/246">
+        <router-link
+            :to="{
+                name: 'trackdetails',
+                params: { id: trackId },
+            }"
+        >
             <div class="song-bar">
                 <div
                     class="cover"
