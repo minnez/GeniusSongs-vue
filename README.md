@@ -2,7 +2,11 @@
 
 based on the Spotify API
 
-not complete yet
+# Deployed
+
+this application has been deployed to https://spotifysonginfo.netlify.app/
+Enjoy!!
+early release😅
 
 ## Project setup
 
