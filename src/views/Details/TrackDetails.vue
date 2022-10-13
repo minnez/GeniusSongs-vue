@@ -10,7 +10,10 @@
                 >Back</span
             >
         </div>
-        <div class="details">
+        <div class="load" v-if="!albumCover">
+            <Loading2 />
+        </div>
+        <div v-else class="details">
             <div
                 :style="{
                     'background-image': `url(${albumCover})`,
@@ -21,56 +24,127 @@
                 <div class="name mb-15">
                     Song Title: <span>{{ songTitle }}</span>
                 </div>
-                <div class="owner mb-15">
-                    Artist Name: <span>{{ artistName }}</span>
+                <div class="duration mb-15">
+                    Song duration:
+                    <span v-if="songDurationReadable">{{
+                        songDurationReadable
+                    }}</span>
+                    <span v-else>--:--</span>
                 </div>
-                <!-- <div class="duration">4:56</div> -->
+                <div class="owner mb-15">
+                    Artist Name:
+                    <span
+                        ><router-link
+                            :to="{
+                                name: 'artistdetails',
+                                params: { id: artistId },
+                            }"
+                            >{{ artistName }}</router-link
+                        ></span
+                    >
+                </div>
                 <!-- <div class="genre">{{ rank }}</div> -->
                 <div class="mb-15">
                     Other Artistes:
-                    <span v-if="otherArtiste">{{ otherArtiste }}</span>
+                    <span v-if="otherArtiste"
+                        ><router-link
+                            v-if="otherArtiste"
+                            :to="{
+                                name: 'artistdetails',
+                                params: { id: otherArtisteId },
+                            }"
+                            >{{ otherArtiste }}</router-link
+                        ></span
+                    >
                     <span v-else>None</span>
                 </div>
                 <div class="mb-15">
                     Released on: <span>{{ releaseDate }}</span>
                 </div>
-                <div class="mb-15">
+                <!-- <div class="mb-15">
                     Top songs Ranking: <span>{{ rank }}</span>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { computed, onMounted, ref } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
+import Loading2 from "@/components/loading/Loading2.vue";
 export default {
-    components: {},
+    components: { Loading2 },
     setup() {
         const route = useRoute();
 
-        const {
-            albumCover,
-            songTitle,
-            artistName,
-            rank,
-            releaseDate,
-            otherArtiste,
-        } = route.query;
+        const albumCover = ref();
+        const songTitle = ref();
+        const artistName = ref();
+        const releaseDate = ref();
+        const otherArtiste = ref();
+        const songDuration = ref();
+        const artistId = ref();
+        const otherArtisteId = ref();
+
+        const { id } = route.params;
+        onMounted(() => {
+            const options = {
+                method: "GET",
+                headers: {
+                    "X-RapidAPI-Key": process.env.VUE_APP_X_RAPID_API_KEY,
+                    "X-RapidAPI-Host": process.env.VUE_APP_X_RAPID_API_HOST2,
+                },
+            };
+
+            fetch("https://spotify23.p.rapidapi.com/tracks/?ids=" + id, options)
+                .then((response) => response.json())
+                .then((response) => {
+                    // console.log(response.tracks[0].duration_ms);
+                    songDuration.value = response.tracks[0].duration_ms;
+                    songTitle.value = response.tracks[0].name;
+                    albumCover.value = response.tracks[0].album.images[1].url;
+                    artistName.value = response.tracks[0].album.artists[0].name;
+                    artistId.value = response.tracks[0].album.artists[0].id;
+                    releaseDate.value = response.tracks[0].album.release_date;
+                    otherArtiste.value =
+                        response.tracks[0].album.artists[1] &&
+                        response.tracks[0].album.artists[1].name;
+                    otherArtisteId.value =
+                        response.tracks[0].album.artists[1] &&
+                        response.tracks[0].album.artists[1].id;
+                    // songDuration.value = response.tracks[0].duration_ms;
+                })
+                .catch((err) => console.error(err));
+        });
+
+        const songDurationReadable = computed(() => {
+            let minutes = Math.floor(songDuration.value / 60000);
+            let seconds = ((songDuration.value % 60000) / 1000).toFixed(0);
+            return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        });
 
         return {
             albumCover,
             songTitle,
             artistName,
-            rank,
             otherArtiste,
             releaseDate,
+            songDurationReadable,
+            artistId,
+            otherArtisteId,
         };
     },
 };
 </script>
 
 <style>
+.load {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .mb-15 {
     margin-bottom: 15px;
     font-weight: 200;
@@ -110,7 +184,7 @@ export default {
     width: fit-content;
 }
 .details .name > span {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 .details .followers {
     font-weight: 400;
