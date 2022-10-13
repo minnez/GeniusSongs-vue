@@ -6,6 +6,8 @@
                     ><i class="fa-solid fa-magnifying-glass"></i
                 ></span>
                 <input
+                    @keypress.enter="searchTrack"
+                    v-model="trackSearch"
                     placeholder="Search Tracks"
                     class="inputTerm"
                     type="text"
@@ -20,84 +22,20 @@
                 ></i>
             </div>
         </div>
+        <div v-if="loading" class="beforeSearchArtist">
+            <h2 v-if="!queryData">Search for Tracks to view here</h2>
+            <Loading2 v-else />
+        </div>
 
-        <div class="home-content">
+        <div v-else class="artist-main">
             <SongBar
-                albumCover="album4.jpg"
-                songTitle="Runaway"
-                artistName="21 Savage"
-                duration="4:46"
-                trackId="sdf"
-            />
-            <SongBar
-                albumCover="album1.jpg"
-                songTitle="Despacito"
-                artistName="Michael Jackson"
-                trackId="sdf"
-                duration="5:46"
-            />
-            <SongBar
-                albumCover="album3.jpg"
-                songTitle="River Flows in You"
-                trackId="sdf"
-                artistName="Yiruma"
-                duration="6:03"
-            />
-            <SongBar
-                albumCover="album2.jpg"
-                songTitle="Funky Friday"
-                trackId="sdf"
-                artistName="Ohemaa Mercy"
-                duration="3:26"
-            />
-            <SongBar
-                trackId="sdf"
-                albumCover="album4.jpg"
-                songTitle="Runaway"
-                artistName="21 Savage"
-                duration="4:46"
-            />
-            <SongBar
-                albumCover="album1.jpg"
-                songTitle="Despacito"
-                trackId="sdf"
-                artistName="Michael Jackson"
-                duration="5:46"
-            />
-            <SongBar
-                albumCover="album1.jpg"
-                songTitle="Despacito"
-                artistName="Michael Jackson"
-                trackId="sdf"
-                duration="5:46"
-            />
-            <SongBar
-                albumCover="album3.jpg"
-                songTitle="River Flows in You"
-                artistName="Yiruma"
-                trackId="sdf"
-                duration="6:03"
-            />
-            <SongBar
-                albumCover="album2.jpg"
-                songTitle="Funky Friday"
-                artistName="Ohemaa Mercy"
-                trackId="sdf"
-                duration="3:26"
-            />
-            <SongBar
-                albumCover="album4.jpg"
-                trackId="sdf"
-                songTitle="Runaway"
-                artistName="21 Savage"
-                duration="4:46"
-            />
-            <SongBar
-                albumCover="album1.jpg"
-                trackId="sdf"
-                songTitle="Despacito"
-                artistName="Michael Jackson"
-                duration="5:46"
+                v-for="(track, index) in queryData"
+                :key="index"
+                :albumCover="track.data.albumOfTrack.coverArt.sources[0].url"
+                :songTitle="track.data.name"
+                :artistName="track.data.artists.items[0].profile.name"
+                :duration="track.data.duration.totalMilliseconds"
+                :trackId="track.data.id"
             />
         </div>
     </div>
@@ -106,23 +44,65 @@
 <script>
 // @ is an alias to /src
 import SongBar from "@/components/SongBar.vue";
+import Loading2 from "@/components/loading/Loading2.vue";
+import { ref } from "@vue/reactivity";
 export default {
-    components: { SongBar },
+    components: { SongBar, Loading2 },
+    setup() {
+        const searchTrack = () => {
+            queryData.value = true;
+            loading.value = true;
+            const options = {
+                method: "GET",
+                headers: {
+                    "X-RapidAPI-Key": process.env.VUE_APP_X_RAPID_API_KEY,
+                    "X-RapidAPI-Host": process.env.VUE_APP_X_RAPID_API_HOST,
+                },
+            };
+            fetch(
+                "https://spotify81.p.rapidapi.com/search?q=" +
+                    trackSearch.value +
+                    "&type=tracks&offset=0&limit=10&numberOfTopResults=5",
+                options
+            )
+                .then((response) => response.json())
+                // .then((response) => console.log(response.tracks))
+                .then((response) => (queryData.value = response.tracks))
+                .then(() => (loading.value = false))
+                .catch((err) => console.error(err));
+            // console.log(artistSearch.value);
+        };
+        const trackSearch = ref("");
+        const queryData = ref();
+        const loading = ref(true);
+
+        return { trackSearch, searchTrack, queryData, loading };
+    },
 };
 </script>
-<style scoped>
-.home-content {
+<style>
+.beforeSearchArtist {
+    height: 400px;
     padding: 10px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgba(111, 216, 233, 0.8);
+    text-align: center;
+}
+.artist-main {
+    padding: 10px;
+    height: 100%;
+    display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    align-items: flex-start;
     overflow: scroll;
     overflow-x: hidden;
-    align-items: center;
+    flex-wrap: wrap;
 }
-
 @media screen and (max-width: 820px) {
-    .home-content {
+    .artist-main {
         flex-direction: column;
         flex-wrap: wrap;
         overflow: scroll;
