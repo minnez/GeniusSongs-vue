@@ -4,14 +4,6 @@
             :to="{
                 name: 'trackdetails',
                 params: { id: link },
-                query: {
-                    albumCover,
-                    songTitle,
-                    artistName,
-                    rank,
-                    otherArtiste,
-                    releaseDate,
-                },
             }"
         >
             <div class="song-card">
