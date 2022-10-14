@@ -94,17 +94,23 @@ export default {
 .artist-main {
     padding: 10px;
     height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: auto auto auto auto;
     overflow: scroll;
     overflow-x: hidden;
     flex-wrap: wrap;
 }
+@media screen and (max-width: 1000px) {
+    .artist-main {
+        grid-template-columns: auto auto auto;
+    }
+}
 @media screen and (max-width: 820px) {
     .artist-main {
-        flex-direction: column;
-        flex-wrap: wrap;
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-rows: auto auto;
         overflow: scroll;
         overflow-y: hidden;
     }
