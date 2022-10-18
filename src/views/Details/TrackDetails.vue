@@ -31,6 +31,20 @@
                     }}</span>
                     <span v-else>--:--</span>
                 </div>
+                <div class="duration mb-15">
+                    Album :
+                    <span v-if="albumType == 'single'">{{ albumType }}</span>
+                    <span v-else>
+                        <router-link
+                            :to="{
+                                name: 'albumdetails',
+                                params: { id: albumLink },
+                            }"
+                        >
+                            {{ albumName }}
+                        </router-link>
+                    </span>
+                </div>
                 <div class="owner mb-15">
                     Artist Name:
                     <span
@@ -86,6 +100,9 @@ export default {
         const songDuration = ref();
         const artistId = ref();
         const otherArtisteId = ref();
+        const albumType = ref();
+        const albumName = ref();
+        const albumLink = ref();
 
         const { id } = route.params;
         onMounted(() => {
@@ -100,13 +117,16 @@ export default {
             fetch("https://spotify23.p.rapidapi.com/tracks/?ids=" + id, options)
                 .then((response) => response.json())
                 .then((response) => {
-                    // console.log(response.tracks[0].duration_ms);
+                    console.log(response.tracks[0]);
                     songDuration.value = response.tracks[0].duration_ms;
                     songTitle.value = response.tracks[0].name;
                     albumCover.value = response.tracks[0].album.images[1].url;
                     artistName.value = response.tracks[0].album.artists[0].name;
                     artistId.value = response.tracks[0].album.artists[0].id;
                     releaseDate.value = response.tracks[0].album.release_date;
+                    albumType.value = response.tracks[0].album.album_type;
+                    albumName.value = response.tracks[0].album.name;
+                    albumLink.value = response.tracks[0].album.id;
                     otherArtiste.value =
                         response.tracks[0].album.artists[1] &&
                         response.tracks[0].album.artists[1].name;
@@ -133,6 +153,9 @@ export default {
             songDurationReadable,
             artistId,
             otherArtisteId,
+            albumType,
+            albumName,
+            albumLink,
         };
     },
 };

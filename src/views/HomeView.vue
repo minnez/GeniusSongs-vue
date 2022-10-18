@@ -52,7 +52,7 @@ export default {
 }
 @media screen and (max-width: 328px) {
     .top-artist {
-        padding-left: 20px;
+        /* padding-left: 20px; */
     }
 }
 </style>

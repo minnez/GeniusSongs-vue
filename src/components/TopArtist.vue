@@ -56,6 +56,7 @@ export default {
     grid-auto-flow: column;
     overflow-y: hidden;
     grid-template-rows: auto auto;
+    padding-left: 10px;
 }
 .topartistloading {
     margin: auto;
@@ -77,13 +78,14 @@ export default {
 }
 .top-artist .title {
     font-weight: 600;
+    padding-left: 20px;
 }
 @media screen and (max-width: 328px) {
     .title {
         padding-left: 20px;
     }
     .songs {
-        padding-left: 20px;
+        padding-left: 10px;
     }
 }
 </style>
