@@ -72,9 +72,13 @@
                     >
                     <span v-else>None</span>
                 </div>
+                <div>
+                    <button @click="playAudio">play</button>
+                </div>
                 <div class="mb-15">
                     Released on: <span>{{ releaseDate }}</span>
                 </div>
+
                 <!-- <div class="mb-15">
                     Top songs Ranking: <span>{{ rank }}</span>
                 </div> -->
@@ -103,6 +107,7 @@ export default {
         const albumType = ref();
         const albumName = ref();
         const albumLink = ref();
+        const audioLink = ref();
 
         const { id } = route.params;
         onMounted(() => {
@@ -133,10 +138,23 @@ export default {
                     otherArtisteId.value =
                         response.tracks[0].album.artists[1] &&
                         response.tracks[0].album.artists[1].id;
+                    audioLink.value = response.tracks[0].preview_url;
                     // songDuration.value = response.tracks[0].duration_ms;
                 })
                 .catch((err) => console.error(err));
         });
+
+        const playAudio = async () => {
+            var audio = new Audio(audioLink.value);
+            audio.type = "audio/wav";
+
+            try {
+                await audio.play();
+                console.log("Playing...");
+            } catch (err) {
+                console.log("Failed to play..." + err);
+            }
+        };
 
         const songDurationReadable = computed(() => {
             let minutes = Math.floor(songDuration.value / 60000);
@@ -156,6 +174,7 @@ export default {
             albumType,
             albumName,
             albumLink,
+            playAudio,
         };
     },
 };
