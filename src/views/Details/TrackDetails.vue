@@ -14,16 +14,33 @@
             <Loading2 />
         </div>
         <div v-else class="details">
-            <div
-                :style="{
-                    'background-image': `url(${albumCover})`,
-                }"
-                class="album-details-cover"
-            ></div>
+            <div>
+                <div
+                    :style="{
+                        'background-image': `url(${albumCover})`,
+                    }"
+                    class="album-details-cover"
+                ></div>
+                <div class="play">
+                    <audio :src="audioLink" ref="audioPlayer">
+                        Your browser does not support the
+                        <code>audio</code> element.
+                    </audio>
+
+                    <div v-if="!isplaying" @click="playAudio" class="play-btn">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div v-else @click="pauseAudio" class="play-btn">
+                        <i class="fa-solid fa-pause"></i>
+                    </div>
+                    <span class="mb-15">preview track</span>
+                </div>
+            </div>
             <div class="t-details">
                 <div class="name mb-15">
                     Song Title: <span>{{ songTitle }}</span>
                 </div>
+
                 <div class="duration mb-15">
                     Song duration:
                     <span v-if="songDurationReadable">{{
@@ -72,16 +89,7 @@
                     >
                     <span v-else>None</span>
                 </div>
-                <div>
-                    <audio :src="audioLink" ref="audioPlayer">
-                        Your browser does not support the
-                        <code>audio</code> element.
-                    </audio>
-                    <button v-if="!isplaying" @click="playAudio">
-                        play &#9658;
-                    </button>
-                    <button v-else @click="pauseAudio">pause &#9611;</button>
-                </div>
+
                 <div class="mb-15">
                     Released on: <span>{{ releaseDate }}</span>
                 </div>
@@ -190,6 +198,17 @@ export default {
 </script>
 
 <style>
+.play {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.play-btn {
+    padding-top: 15px;
+    font-size: 2rem;
+    margin: 5px;
+}
 .load {
     height: 500px;
     display: flex;
@@ -222,7 +241,6 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
 }
 
 .album-details-cover {
@@ -258,6 +276,12 @@ export default {
 .back {
     padding: 10px;
     border-bottom: 1px solid #ccc;
+}
+@media screen and (max-width: 975px) {
+    .mb-15 {
+        display: flex;
+        flex-direction: column;
+    }
 }
 @media screen and (max-width: 700px) {
     .details {
