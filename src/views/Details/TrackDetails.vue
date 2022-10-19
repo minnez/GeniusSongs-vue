@@ -137,7 +137,7 @@ export default {
             fetch("https://spotify23.p.rapidapi.com/tracks/?ids=" + id, options)
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log(response.tracks[0]);
+                    // console.log(response.tracks[0]);
                     songDuration.value = response.tracks[0].duration_ms;
                     songTitle.value = response.tracks[0].name;
                     albumCover.value = response.tracks[0].album.images[1].url;
