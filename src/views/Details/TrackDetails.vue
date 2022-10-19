@@ -73,7 +73,14 @@
                     <span v-else>None</span>
                 </div>
                 <div>
-                    <button @click="playAudio">play</button>
+                    <audio :src="audioLink" ref="audioPlayer">
+                        Your browser does not support the
+                        <code>audio</code> element.
+                    </audio>
+                    <button v-if="!isplaying" @click="playAudio">
+                        play &#9658;
+                    </button>
+                    <button v-else @click="pauseAudio">pause &#9611;</button>
                 </div>
                 <div class="mb-15">
                     Released on: <span>{{ releaseDate }}</span>
@@ -139,21 +146,19 @@ export default {
                         response.tracks[0].album.artists[1] &&
                         response.tracks[0].album.artists[1].id;
                     audioLink.value = response.tracks[0].preview_url;
-                    // songDuration.value = response.tracks[0].duration_ms;
                 })
                 .catch((err) => console.error(err));
         });
 
-        const playAudio = async () => {
-            var audio = new Audio(audioLink.value);
-            audio.type = "audio/wav";
-
-            try {
-                await audio.play();
-                console.log("Playing...");
-            } catch (err) {
-                console.log("Failed to play..." + err);
-            }
+        const isplaying = ref(false);
+        const audioPlayer = ref(null);
+        const playAudio = () => {
+            audioPlayer.value.play();
+            isplaying.value = true;
+        };
+        const pauseAudio = () => {
+            audioPlayer.value.pause();
+            isplaying.value = false;
         };
 
         const songDurationReadable = computed(() => {
@@ -175,6 +180,10 @@ export default {
             albumName,
             albumLink,
             playAudio,
+            audioLink,
+            pauseAudio,
+            audioPlayer,
+            isplaying,
         };
     },
 };
