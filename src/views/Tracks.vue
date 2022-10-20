@@ -23,7 +23,7 @@
             </div>
         </div>
         <div v-if="loading" class="beforeSearchArtist">
-            <h2 v-if="!queryData">Search for Tracks to view here</h2>
+            <h2 v-if="!queryData.length">Search for Tracks to view here</h2>
             <Loading2 v-else />
         </div>
 
@@ -46,11 +46,23 @@
 import SongBar from "@/components/SongBar.vue";
 import Loading2 from "@/components/loading/Loading2.vue";
 import { ref } from "@vue/reactivity";
+import { useStore } from "vuex";
+import { computed, onMounted } from "@vue/runtime-core";
 export default {
     components: { SongBar, Loading2 },
     setup() {
+        const store = useStore();
+
+        const trackSearch = ref("");
+        const loading = ref(true);
+
+        onMounted(() => {
+            if (store.state.searchedTracks.length) {
+                loading.value = false;
+            }
+        });
+
         const searchTrack = () => {
-            queryData.value = true;
             loading.value = true;
             const options = {
                 method: "GET",
@@ -67,14 +79,15 @@ export default {
             )
                 .then((response) => response.json())
                 // .then((response) => console.log(response.tracks))
-                .then((response) => (queryData.value = response.tracks))
+                .then((response) =>
+                    store.dispatch("saveTracks", response.tracks)
+                )
                 .then(() => (loading.value = false))
                 .catch((err) => console.error(err));
             // console.log(artistSearch.value);
         };
-        const trackSearch = ref("");
-        const queryData = ref();
-        const loading = ref(true);
+
+        const queryData = computed(() => store.state.searchedTracks);
 
         return { trackSearch, searchTrack, queryData, loading };
     },

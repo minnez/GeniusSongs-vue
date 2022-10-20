@@ -27,7 +27,7 @@
             <Loading2 v-else />
         </div>
 
-        <div v-else class="artist-main">
+        <div v-else class="album-main">
             <AlbumCard
                 v-for="(album, index) in queryData"
                 :link="album.data.uri.slice(14)"
@@ -91,7 +91,7 @@ export default {
     color: rgba(111, 216, 233, 0.8);
     text-align: center;
 }
-.artist-main {
+.album-main {
     padding: 10px;
     height: 100%;
     display: grid;
@@ -102,12 +102,12 @@ export default {
     flex-wrap: wrap;
 }
 @media screen and (max-width: 1000px) {
-    .artist-main {
+    .album-main {
         grid-template-columns: auto auto auto;
     }
 }
 @media screen and (max-width: 820px) {
-    .artist-main {
+    .album-main {
         display: grid;
         grid-auto-flow: column;
         grid-template-rows: auto auto;

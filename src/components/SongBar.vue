@@ -46,6 +46,7 @@ export default {
 .author-info {
     display: flex;
     flex-direction: column;
+    max-width: 280px;
 }
 .song-bar {
     width: fit-content;
@@ -84,15 +85,10 @@ export default {
     .song-bar {
         width: 300px;
     }
-    /* .song-title {
-        max-width: 180px;
-    } */
+
     .author-info {
         max-width: 170px;
     }
-    /* .song-bar .artist-name {
-        display: none;
-    } */
 }
 @media screen and (max-width: 450px) {
     .song-bar {

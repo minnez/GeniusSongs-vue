@@ -3,12 +3,19 @@ import { createStore } from "vuex";
 export default createStore({
     state: {
         topSongs: [],
+        searchedTracks: [],
+        searchedAlbums: [],
+        searchedArtists: [],
     },
     getters: {},
     mutations: {
         SAVE_TOP_SONGS(state, topSongs) {
             console.log(topSongs);
             state.topSongs.push(topSongs);
+        },
+        SAVE_TRACKS(state, tracksquery) {
+            console.log(tracksquery);
+            state.searchedTracks.push(tracksquery);
         },
     },
     actions: {
@@ -29,6 +36,21 @@ export default createStore({
                 .then((response) => response.json())
                 .then((response) => this.state.topSongs.push(...response))
                 .catch((err) => console.error(err));
+        },
+        saveTracks({ commit }, payload) {
+            this.state.searchedTracks = [];
+            this.state.searchedTracks.push(...payload);
+            console.log(this.state.searchedTracks);
+        },
+        saveAlbums({ commit }, payload) {
+            this.state.searchedAlbums = [];
+            this.state.searchedAlbums.push(...payload);
+            console.log(this.state.searchedAlbums);
+        },
+        saveArtists({ commit }, payload) {
+            this.state.searchedArtists = [];
+            this.state.searchedArtists.push(...payload);
+            console.log(this.state.searchedArtists);
         },
     },
     modules: {},
