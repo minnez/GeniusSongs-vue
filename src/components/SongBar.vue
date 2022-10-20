@@ -7,14 +7,19 @@
             }"
         >
             <div class="song-bar">
-                <div
-                    class="cover"
-                    :style="{
-                        'background-image': `url(${albumCover})`,
-                    }"
-                ></div>
-                <div class="song-title">{{ songTitle }}</div>
-                <div class="artist-name">{{ artistName }}</div>
+                <div style="display: flex">
+                    <div
+                        class="cover"
+                        :style="{
+                            'background-image': `url(${albumCover})`,
+                        }"
+                    ></div>
+                    <div class="author-info">
+                        <div class="song-title">{{ songTitle }}</div>
+                        <div class="artist-name">{{ artistName }}</div>
+                    </div>
+                </div>
+
                 <div class="song-duration">{{ timeDuration }}</div>
             </div></router-link
         >
@@ -38,6 +43,10 @@ export default {
 </script>
 
 <style>
+.author-info {
+    display: flex;
+    flex-direction: column;
+}
 .song-bar {
     width: fit-content;
     background: #fff;
@@ -55,11 +64,15 @@ export default {
     width: 40px;
     height: 40px;
     background-size: cover;
+    margin-right: 8px;
     border-radius: 8px;
     box-shadow: 0.4px 0.4px 8px rgba(0, 0, 0, 0.14);
 }
 .song-bar .song-title {
     font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .song-bar .artist-name {
     font-weight: 400;
@@ -71,13 +84,19 @@ export default {
     .song-bar {
         width: 300px;
     }
-    .song-bar .artist-name {
-        display: none;
+    /* .song-title {
+        max-width: 180px;
+    } */
+    .author-info {
+        max-width: 170px;
     }
+    /* .song-bar .artist-name {
+        display: none;
+    } */
 }
 @media screen and (max-width: 450px) {
     .song-bar {
-        width: 250px;
+        width: 280px;
     }
 }
 </style>
