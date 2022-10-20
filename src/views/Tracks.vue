@@ -74,7 +74,7 @@ export default {
             fetch(
                 "https://spotify81.p.rapidapi.com/search?q=" +
                     trackSearch.value +
-                    "&type=tracks&offset=0&limit=10&numberOfTopResults=5",
+                    "&type=tracks&offset=0&limit=15&numberOfTopResults=5",
                 options
             )
                 .then((response) => response.json())

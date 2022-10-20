@@ -40,17 +40,14 @@ export default createStore({
         saveTracks({ commit }, payload) {
             this.state.searchedTracks = [];
             this.state.searchedTracks.push(...payload);
-            console.log(this.state.searchedTracks);
         },
         saveAlbums({ commit }, payload) {
             this.state.searchedAlbums = [];
             this.state.searchedAlbums.push(...payload);
-            console.log(this.state.searchedAlbums);
         },
         saveArtists({ commit }, payload) {
             this.state.searchedArtists = [];
             this.state.searchedArtists.push(...payload);
-            console.log(this.state.searchedArtists);
         },
     },
     modules: {},

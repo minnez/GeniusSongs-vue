@@ -23,7 +23,7 @@
             </div>
         </div>
         <div v-if="loading" class="beforeSearchArtist">
-            <h2 v-if="!queryData">Search for Artists to view here</h2>
+            <h2 v-if="!queryData.length">Search for Artists to view here</h2>
             <Loading2 v-else />
         </div>
 
@@ -46,11 +46,23 @@
 import { ref } from "@vue/reactivity";
 import ArtistCard from "../components/ArtistCard.vue";
 import Loading2 from "../components/loading/Loading2.vue";
+import { useStore } from "vuex";
+import { computed, onMounted } from "@vue/runtime-core";
 export default {
     components: { ArtistCard, Loading2 },
     setup() {
+        const store = useStore();
+
+        const artistSearch = ref("");
+        const loading = ref(true);
+
+        onMounted(() => {
+            if (store.state.searchedArtists.length) {
+                loading.value = false;
+            }
+        });
+
         const searchArtist = () => {
-            queryData.value = true;
             loading.value = true;
             const options = {
                 method: "GET",
@@ -62,18 +74,18 @@ export default {
             fetch(
                 "https://spotify81.p.rapidapi.com/search?q=" +
                     artistSearch.value +
-                    "&type=artists&offset=0&limit=10&numberOfTopResults=5",
+                    "&type=artists&offset=0&limit=15&numberOfTopResults=5",
                 options
             )
                 .then((response) => response.json())
-                .then((response) => (queryData.value = response.artists.items))
+                .then((response) =>
+                    store.dispatch("saveArtists", response.artists.items)
+                )
                 .then(() => (loading.value = false))
                 .catch((err) => console.error(err));
             // console.log(artistSearch.value);
         };
-        const artistSearch = ref("");
-        const queryData = ref();
-        const loading = ref(true);
+        const queryData = computed(() => store.state.searchedArtists);
 
         return { artistSearch, searchArtist, queryData, loading };
     },

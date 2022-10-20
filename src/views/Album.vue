@@ -23,7 +23,7 @@
             </div>
         </div>
         <div v-if="loading" class="beforeSearchArtist">
-            <h2 v-if="!queryData">Search for Albums to view here</h2>
+            <h2 v-if="!queryData.length">Search for Albums to view here</h2>
             <Loading2 v-else />
         </div>
 
@@ -45,11 +45,23 @@
 import { ref } from "@vue/reactivity";
 import AlbumCard from "../components/AlbumCard.vue";
 import Loading2 from "../components/loading/Loading2.vue";
+import { useStore } from "vuex";
+import { computed, onMounted } from "@vue/runtime-core";
 export default {
     components: { AlbumCard, Loading2 },
     setup() {
+        const store = useStore();
+
+        const albumSearch = ref("");
+        const loading = ref(true);
+
+        onMounted(() => {
+            if (store.state.searchedAlbums.length) {
+                loading.value = false;
+            }
+        });
+
         const searchAlbum = () => {
-            queryData.value = true;
             loading.value = true;
             const options = {
                 method: "GET",
@@ -61,19 +73,18 @@ export default {
             fetch(
                 "https://spotify81.p.rapidapi.com/search?q=" +
                     albumSearch.value +
-                    "&type=albums&offset=0&limit=10&numberOfTopResults=5",
+                    "&type=albums&offset=0&limit=15&numberOfTopResults=5",
                 options
             )
                 .then((response) => response.json())
                 // .then((response) => console.log(response.albums.items))
-                .then((response) => (queryData.value = response.albums.items))
+                .then((response) =>
+                    store.dispatch("saveAlbums", response.albums.items)
+                )
                 .then(() => (loading.value = false))
                 .catch((err) => console.error(err));
-            // console.log(artistSearch.value);
         };
-        const albumSearch = ref("");
-        const queryData = ref();
-        const loading = ref(true);
+        const queryData = computed(() => store.state.searchedAlbums);
 
         return { albumSearch, searchAlbum, queryData, loading };
     },

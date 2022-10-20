@@ -35,9 +35,9 @@ export default {
         const store = useStore();
         onMounted(() => {
             if (store.state.topSongs.length) {
-                console.log("store has it");
+                // console.log("store has it");
             } else {
-                console.log("fetching in mounted");
+                // console.log("fetching in mounted");
                 store.dispatch("getTopSongs");
             }
         });
