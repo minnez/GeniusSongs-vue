@@ -23,8 +23,10 @@
             </div>
         </div>
         <div v-if="loading" class="beforeSearchArtist">
-            <h2 v-if="!queryData.length">Search for Tracks to view here</h2>
-            <Loading2 v-else />
+            <h2 v-if="!queryData.length && !fetching">
+                Search for Tracks to view here
+            </h2>
+            <Loading2 v-if="fetching" />
         </div>
 
         <div v-else class="artist-main">
@@ -54,6 +56,7 @@ export default {
         const store = useStore();
 
         const trackSearch = ref("");
+        const fetching = ref();
         const loading = ref(true);
 
         onMounted(() => {
@@ -63,6 +66,10 @@ export default {
         });
 
         const searchTrack = () => {
+            if (!trackSearch.value.length) {
+                return;
+            }
+            fetching.value = true;
             loading.value = true;
             const options = {
                 method: "GET",
@@ -83,13 +90,14 @@ export default {
                     store.dispatch("saveTracks", response.tracks)
                 )
                 .then(() => (loading.value = false))
+                .then(() => (fetching.value = false))
                 .catch((err) => console.error(err));
             // console.log(artistSearch.value);
         };
 
         const queryData = computed(() => store.state.searchedTracks);
 
-        return { trackSearch, searchTrack, queryData, loading };
+        return { trackSearch, searchTrack, queryData, loading, fetching };
     },
 };
 </script>

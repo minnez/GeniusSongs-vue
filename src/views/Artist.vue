@@ -23,8 +23,10 @@
             </div>
         </div>
         <div v-if="loading" class="beforeSearchArtist">
-            <h2 v-if="!queryData.length">Search for Artists to view here</h2>
-            <Loading2 v-else />
+            <h2 v-if="!queryData.length && !fetching">
+                Search for Artists to view here
+            </h2>
+            <Loading2 v-if="fetching" />
         </div>
 
         <div v-else class="artist-main">
@@ -55,6 +57,7 @@ export default {
 
         const artistSearch = ref("");
         const loading = ref(true);
+        const fetching = ref();
 
         onMounted(() => {
             if (store.state.searchedArtists.length) {
@@ -63,7 +66,12 @@ export default {
         });
 
         const searchArtist = () => {
+            if (!artistSearch.value.length) {
+                return;
+            }
             loading.value = true;
+            fetching.value = true;
+
             const options = {
                 method: "GET",
                 headers: {
@@ -82,12 +90,13 @@ export default {
                     store.dispatch("saveArtists", response.artists.items)
                 )
                 .then(() => (loading.value = false))
+                .then(() => (fetching.value = false))
                 .catch((err) => console.error(err));
             // console.log(artistSearch.value);
         };
         const queryData = computed(() => store.state.searchedArtists);
 
-        return { artistSearch, searchArtist, queryData, loading };
+        return { artistSearch, searchArtist, queryData, loading, fetching };
     },
 };
 </script>

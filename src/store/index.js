@@ -48,6 +48,7 @@ export default createStore({
         saveArtists({ commit }, payload) {
             this.state.searchedArtists = [];
             this.state.searchedArtists.push(...payload);
+            console.log(this.state.searchedArtists);
         },
     },
     modules: {},
