@@ -22,10 +22,10 @@
                 ><i class="fa-solid fa-user"></i
                 ><span>Artiste</span></router-link
             >
-            <!-- <router-link to="/my-songs"
+            <router-link to="/my-songs"
                 ><i class="fa-solid fa-folder"></i
                 ><span>My songs</span></router-link
-            > -->
+            >
         </div>
     </nav>
 </template>
