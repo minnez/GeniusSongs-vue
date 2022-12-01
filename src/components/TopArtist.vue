@@ -18,8 +18,10 @@
                     :rank="song.chartEntryData.currentRank"
                 />
             </div>
-            <div v-else class="topartistloading"><Loading2 /></div>
-            <!-- <div>{{ topSongs }}</div> -->
+            <div v-else class="topartistloading">
+                <div v-if="!notFound"><Loading2 /></div>
+                <div v-else><ServerError /></div>
+            </div>
         </div>
     </div>
 </template>
@@ -27,10 +29,11 @@
 <script>
 import SongCard from "@/components/SongCard.vue";
 import Loading2 from "@/components/loading/Loading2.vue";
+import ServerError from "@/components/ServerError.vue";
 import { computed, onMounted, onUnmounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
 export default {
-    components: { SongCard, Loading2 },
+    components: { SongCard, Loading2, ServerError },
     setup() {
         const store = useStore();
         onMounted(() => {
@@ -43,8 +46,9 @@ export default {
         });
 
         const topSongs = computed(() => store.state.topSongs);
+        const notFound = computed(() => store.state.notFound);
 
-        return { topSongs };
+        return { topSongs, notFound };
     },
 };
 </script>

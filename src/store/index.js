@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
     state: {
+        notFound: false,
         topSongs: [],
         searchedTracks: [],
         searchedAlbums: [],
@@ -10,11 +11,11 @@ export default createStore({
     getters: {},
     mutations: {
         SAVE_TOP_SONGS(state, topSongs) {
-            console.log(topSongs);
+            // console.log(topSongs);
             state.topSongs.push(topSongs);
         },
         SAVE_TRACKS(state, tracksquery) {
-            console.log(tracksquery);
+            // console.log(tracksquery);
             state.searchedTracks.push(tracksquery);
         },
     },
@@ -34,8 +35,16 @@ export default createStore({
                 options
             )
                 .then((response) => response.json())
-                .then((response) => this.state.topSongs.push(...response))
-                .catch((err) => console.error(err));
+                .then((response) => {
+                    if (response.status_code === 404) {
+                        this.state.notFound = true;
+                    } else {
+                        this.state.topSongs.push(...response);
+                    }
+                })
+                .catch((err) => {
+                    console.log("we got an error");
+                });
         },
         saveTracks({ commit }, payload) {
             this.state.searchedTracks = [];
